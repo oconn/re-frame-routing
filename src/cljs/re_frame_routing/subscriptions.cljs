@@ -17,14 +17,4 @@
   (re-frame/reg-sub
    :router/route-params
    (fn [_ _] (re-frame/subscribe [:router/core]))
-   (fn [{:keys [route-params]} _] route-params))
-
-  (re-frame/reg-sub
-   :router/unauthenticated-links
-   (fn [_ _] (re-frame/subscribe [:router/core]))
-   (fn [{:keys [unauthenticated-links]} _] unauthenticated-links))
-
-  (re-frame/reg-sub
-   :router/authenticated-links
-   (fn [_ _] (re-frame/subscribe [:router/core]))
-   (fn [{:keys [authenticated-links]} _] authenticated-links)))
+   (fn [{:keys [route-params]} _] route-params)))

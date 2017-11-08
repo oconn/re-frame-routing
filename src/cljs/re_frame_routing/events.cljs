@@ -15,7 +15,8 @@
   [{:keys [set-route-interceptors
            nav-to-interceptors
            initialized-interceptors
-           router-interceptors]
+           router-interceptors
+           routes]
     :or {set-route-interceptors []
          nav-to-interceptors []
          initialized-interceptors []
