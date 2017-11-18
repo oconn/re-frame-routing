@@ -1,5 +1,6 @@
 (ns re-frame-routing.events
   (:require [bidi.bidi :as bidi]
+            [cemerick.url :refer [url]]
             [pushy.core :as pushy]
             [re-frame.core :as re-frame]))
 

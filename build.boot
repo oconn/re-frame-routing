@@ -1,6 +1,7 @@
 (set-env! :resource-paths #{"src/cljs"}
           :source-paths   #{"test/cljs"}
           :dependencies   '[[bidi                      "2.1.2"]
+                            [com.cemerick/url          "0.1.1"]
                             [kibu/pushy                "0.3.8"]
                             [org.clojure/clojurescript "1.9.946" :scope "provided"]
                             [re-frame                  "0.10.2"  :scope "provided"]
