@@ -12,6 +12,14 @@
    (fn [route]
      (pushy/set-token! history route))))
 
+(defn- get-route-query
+  []
+  (-> js/window
+      .-location
+      .-href
+      url
+      :query))
+
 (defn register-events
   [{:keys [set-route-interceptors
            nav-to-interceptors
@@ -29,7 +37,8 @@
    (fn [db [_ {:keys [handler route-params]}]]
      (-> db
          (assoc-in [:router :route] handler)
-         (assoc-in [:router :route-params] route-params))))
+         (assoc-in [:router :route-params] route-params)
+         (assoc-in [:router :route-query] (get-route-query)))))
 
   (re-frame/reg-event-fx
    :router/nav-to

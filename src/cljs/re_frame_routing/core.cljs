@@ -6,6 +6,7 @@
 (def initial-state
   {:route nil
    :route-params nil
+   :route-query nil
    :initialized false})
 
 (s/def ::href string?)
@@ -14,8 +15,10 @@
 (s/def ::initialized boolean?)
 (s/def ::route (s/nilable keyword?))
 (s/def ::route-params (s/nilable map?))
+(s/def ::route-query (s/nilable map?))
 (s/def ::router (s/keys :req-un [::route
                                  ::route-params
+                                 ::route-query
                                  ::initialized]))
 
 (defn register-events
