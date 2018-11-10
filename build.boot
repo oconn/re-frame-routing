@@ -1,6 +1,6 @@
 (set-env! :resource-paths #{"src/cljs"}
           :source-paths   #{"test/cljs"}
-          :dependencies   '[[bidi                      "2.1.2"]
+          :dependencies   '[[bidi                      "2.1.4"]
                             [com.cemerick/url          "0.1.1"]
                             [kibu/pushy                "0.3.8"]
                             [org.clojure/clojurescript "1.9.946" :scope "provided"]
@@ -14,7 +14,7 @@
          '[boot.git         :refer [last-commit]])
 
 (def project 'oconn/re-frame-routing)
-(def +version+ "0.1.0-SNAPSHOT")
+(def +version+ "0.1.1-SNAPSHOT")
 
 (task-options!
  pom {:project     project
