@@ -11,7 +11,7 @@
          '[boot.git         :refer [last-commit]])
 
 (def project 'oconn/re-frame-routing)
-(def +version+ "0.1.1-SNAPSHOT")
+(def +version+ "0.1.1")
 
 (task-options!
  pom {:project     project
