@@ -1,16 +1,13 @@
 (set-env! :resource-paths #{"src/cljs"}
-          :source-paths   #{"test/cljs"}
           :dependencies   '[[bidi                      "2.1.4"]
                             [com.cemerick/url          "0.1.1"]
                             [kibu/pushy                "0.3.8"]
-                            [org.clojure/clojurescript "1.9.946" :scope "provided"]
-                            [re-frame                  "0.10.2"  :scope "provided"]
+                            [org.clojure/clojurescript "1.10.439" :scope "provided"]
+                            [re-frame                  "0.10.6"  :scope "provided"]
 
-                            [adzerk/bootlaces  "0.1.13" :scope "test"]
-                            [adzerk/boot-test  "1.2.0"  :scope "test"]])
+                            [adzerk/bootlaces  "0.1.13" :scope "test"]])
 
-(require '[adzerk.boot-test :refer [test]]
-         '[adzerk.bootlaces :refer :all]
+(require '[adzerk.bootlaces :refer :all]
          '[boot.git         :refer [last-commit]])
 
 (def project 'oconn/re-frame-routing)

@@ -1,0 +1,11 @@
+{:paths ["src/cljs"]
+
+ :deps {org.clojure/clojurescript {:mvn/version "1.10.439"}
+        bidi                      {:mvn/version "2.1.4"}
+        com.cemerick/url          {:mvn/version "0.1.1"}
+        kibu/pushy                {:mvn/version "0.3.8"}
+        re-frame                  {:mvn/version "0.10.6"}}
+
+ :aliases {:test {:extra-deps {olical/cljs-test-runner {:mvn/version "3.2.0"}}
+                  :extra-paths ["test/cljs"]
+                  :main-opts ["-m" "cljs-test-runner.main"]}}}
