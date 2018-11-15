@@ -9,6 +9,8 @@ ClojureScript (re-frame) library that manages routing and route state.
 
 [![Clojars Project](https://img.shields.io/clojars/v/oconn/re-frame-routing.svg)](https://clojars.org/oconn/re-frame-routing)
 
+[![CircleCI](https://circleci.com/gh/oconn/re-frame-routing/tree/master.svg?style=shield)](https://circleci.com/gh/oconn/re-frame-routing/tree/master)
+
 ### Step 2: Import Events
 
 ```cljs
