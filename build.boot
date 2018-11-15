@@ -1,4 +1,4 @@
-(set-env! :resource-paths #{"src/cljs"}
+(set-env! :resource-paths #{"src"}
           :dependencies   '[[bidi                      "2.1.4"]
                             [com.cemerick/url          "0.1.1"]
                             [kibu/pushy                "0.3.8"]
