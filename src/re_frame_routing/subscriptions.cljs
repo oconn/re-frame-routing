@@ -17,9 +17,9 @@
   (re-frame/reg-sub
    :router/route-params
    #(re-frame/subscribe [:router/core])
-   (fn [{:keys [route-params]} _] route-params)))
+   (fn [{:keys [route-params]} _] route-params))
 
-(re-frame/reg-sub
+  (re-frame/reg-sub
    :router/route-query
    #(re-frame/subscribe [:router/core])
-   (fn [{:keys [route-query]} _] route-query))
+   (fn [{:keys [route-query]} _] route-query)))
