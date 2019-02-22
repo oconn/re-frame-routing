@@ -1,6 +1,6 @@
 {:paths ["src"]
 
- :deps {org.clojure/clojurescript {:mvn/version "1.10.439"}
+ :deps {org.clojure/clojurescript {:mvn/version "1.10.520"}
         bidi                      {:mvn/version "2.1.4"}
         com.cemerick/url          {:mvn/version "0.1.1"}
         kibu/pushy                {:mvn/version "0.3.8"}

@@ -2,7 +2,7 @@
           :dependencies   '[[bidi                      "2.1.4"]
                             [com.cemerick/url          "0.1.1"]
                             [kibu/pushy                "0.3.8"]
-                            [org.clojure/clojurescript "1.10.439" :scope "provided"]
+                            [org.clojure/clojurescript "1.10.520" :scope "provided"]
                             [re-frame                  "0.10.6"  :scope "provided"]
 
                             [adzerk/bootlaces  "0.1.13" :scope "test"]])
@@ -11,7 +11,7 @@
          '[boot.git         :refer [last-commit]])
 
 (def project 'oconn/re-frame-routing)
-(def +version+ "0.1.1")
+(def +version+ "0.1.2")
 
 (task-options!
  pom {:project     project

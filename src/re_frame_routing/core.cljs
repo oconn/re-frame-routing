@@ -50,6 +50,7 @@
   (fn [container middleware]
     (let [route-params (re-frame/subscribe [:router/route-params])
           route-query (re-frame/subscribe [:router/route-query])
+          route-key (re-frame/subscribe [:router/route])
           ;; Middleware state can be used for anything, and is the recommended
           ;; method for sharing infromation between middleware functions
           ;; or track information on global state updates that will trigger
@@ -80,4 +81,4 @@
 
           (if (true? is-loading)
             [loading-view]
-            [container @route-params @route-query]))))))
+            [container @route-params @route-query @route-key]))))))
