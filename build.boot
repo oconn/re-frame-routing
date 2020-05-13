@@ -1,5 +1,5 @@
 (set-env! :resource-paths #{"src"}
-          :dependencies   '[[bidi                      "2.1.4"]
+          :dependencies   '[[bidi                      "2.1.6"]
                             [com.cemerick/url          "0.1.1"]
                             [kibu/pushy                "0.3.8"]
                             [org.clojure/clojurescript "1.10.520" :scope "provided"]
@@ -11,7 +11,7 @@
          '[boot.git         :refer [last-commit]])
 
 (def project 'oconn/re-frame-routing)
-(def +version+ "0.1.2")
+(def +version+ "0.1.3")
 
 (task-options!
  pom {:project     project
