@@ -1,10 +1,10 @@
 {:paths ["src"]
 
- :deps {org.clojure/clojurescript {:mvn/version "1.10.758"}
-        bidi                      {:mvn/version "2.1.6"}
+ :deps {bidi/bidi          {:mvn/version "2.1.6"}
         com.cemerick/url          {:mvn/version "0.1.1"}
         kibu/pushy                {:mvn/version "0.3.8"}
-        re-frame                  {:mvn/version "0.10.6"}}
+        re-frame/re-frame  {:mvn/version "0.10.6"}
+        metosin/spec-tools {:mvn/version "0.10.5"}}
 
  :aliases {:test
            {:extra-deps {olical/cljs-test-runner {:mvn/version "3.2.0"}}
@@ -24,4 +24,8 @@
             ["-m" "deps-deploy.deps-deploy" "deploy" "app.jar"]
 
             :extra-deps
-            {deps-deploy {:mvn/version "RELEASE"}}}}}
+            {deps-deploy {:mvn/version "RELEASE"}}}
+
+           :shadow-cljs
+           {:extra-deps {thheller/shadow-cljs {:mvn/version "2.15.10"}}
+            :main-opts ["-m" "shadow.cljs.devtools.cli"]}}}
