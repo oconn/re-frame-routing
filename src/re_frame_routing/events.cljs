@@ -48,7 +48,7 @@
 
        (pushy/start! history)
 
-       (re-frame/dispatch [:router/initialized])))))
+      (re-frame/dispatch [:router/initialized]))))
 
 (defn log
   [report-error-fn _ [_ error]]
