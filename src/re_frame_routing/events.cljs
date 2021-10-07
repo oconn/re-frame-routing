@@ -52,7 +52,7 @@
 
 (defn log
   [report-error-fn _ [_ error]]
-  ((or report-error-fn js/console.log) error))
+  ((or report-error-fn js/console.error) error))
 
 ;; Public functions
 
