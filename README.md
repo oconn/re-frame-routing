@@ -88,7 +88,7 @@ Middleware functions will be passed a context object and are expected to return 
 ### Route Coercion
 
 Given data sent to the servers and to the component originates from information synced in the url (path and query params), it's ideal to have a way to share concerns over configuration (coercion and defaults).
-The library supports that concern by allowing you to supply an `routes-enrched` tree where leafs can be supplied a configuration instead of a keyword. e.g
+The library supports that concern by allowing you to supply an `routes-enirched` tree where leafs can be supplied a configuration instead of a keyword. e.g
 
 ```
 {:query {:site {:coercion int?}
