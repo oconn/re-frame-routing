@@ -22,12 +22,12 @@
       :query))
 
 (defn set-route
-  [db [_ {:keys [handler route-params] :as params} routes]]
-  (-> db
-      (assoc-in [:router :route] handler)
-      (assoc-in [:router :route-params] route-params)
-      (assoc-in [:router :route-query] (get-route-query))
-      (coercion/coerce params routes)))
+  [db [_ {:keys [handler route-params] :as params} {:keys [routes-enriched]}]]
+  (cond-> db
+      true (assoc-in [:router :route] handler)
+      true (assoc-in [:router :route-params] route-params)
+      true (assoc-in [:router :route-query] (get-route-query))
+      routes-enriched (coercion/coerce params routes-enriched)))
 
 (defn nav-to
   [{:keys [db]} [_ route]]
@@ -39,19 +39,9 @@
   (assoc-in db [:router :initialized] true))
 
 (defn- pushy-init
-  ([routes]
+  [{:keys [routes] :as args}]
   (fn [_]
-     (let [history (pushy/pushy #(re-frame/dispatch [:router/set-route (assoc % :route-query (get-route-query)) routes])
-                                #(bidi/match-route (coercion/enchanced-routes->bidi-routes routes) %))]
-
-      (listen-for-navigation! history)
-
-      (pushy/start! history)
-
-      (re-frame/dispatch [:router/initialized]))))
-  ([routes {:keys [routes-enriched]}]
-   (fn [_]
-     (let [history (pushy/pushy #(re-frame/dispatch [:router/set-route (assoc % :route-query (get-route-query)) routes-enriched])
+    (let [history (pushy/pushy #(re-frame/dispatch [:router/set-route (assoc % :route-query (get-route-query)) args])
                                 #(bidi/match-route routes %))]
 
        (listen-for-navigation! history)
@@ -71,13 +61,11 @@
            nav-to-interceptors
            initialized-interceptors
            router-interceptors
-           routes
-           routes-enriched
            routes-error-report-fn]
     :or {set-route-interceptors []
          nav-to-interceptors []
          initialized-interceptors []
-         router-interceptors []}}]
+         router-interceptors []} :as args}]
 
   (re-frame/reg-event-db
    :router/set-route
@@ -96,7 +84,7 @@
 
   (re-frame/reg-fx
    :pushy-init
-   (pushy-init routes {:routes-enriched routes-enriched}))
+   (pushy-init (select-keys args [:routes :routes-enriched])))
 
   (re-frame/reg-event-fx
    :router/coercion-error
