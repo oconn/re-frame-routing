@@ -5,18 +5,9 @@
    [re-frame.core :as re-frame]
    [clojure.walk :refer [postwalk keywordize-keys]]))
 
-(defn enchanced-routes->bidi-routes*
-  "Takes a route tree where the leafs/coercion-config-info are maps and makes it bidi compliment by transforming them to keywords."
-  [routes]
-  (postwalk (fn [node]
-              (if-let [name (and (map? node) (:name node))]
-                name
-                node
-                )) routes))
+(def handler->info (atom {}))
 
-(def enchanced-routes->bidi-routes (memoize enchanced-routes->bidi-routes* ))
-
-(defn params+corecion-info->coererced-params
+(defn params+corecion-info->coerced-params
   "Applies coercion information to raw parameters with some sensible default logic in case of failure."
   [raw-params corecion-info]
   (reduce-kv
@@ -41,18 +32,17 @@
 
 (defn coerce
   [db {:keys [handler route-params route-query]} routes]
-  ;;TODO make this faster and lazier by only computing as needed and maybe only once by creating a handler->config lookup map
-  (let [handler-info (atom nil)]
+  ;;NOTE This does a one time walk to gather the necessary information for coercion and cache it for fast lookup. An alternative
+  ;; approach would be to pass this lookup instead of the enriched routes, but that seems less future proof (e.g adding more enriched features)
+  (when-not (seq @handler->info)
     (postwalk (fn [node]
-                (if (= handler (:name node))
-                  (do
-                    (reset! handler-info node)
-                    node)
+                (if (and (map? node) (:name node))
+                  (swap! handler->info assoc (:name node) node)
                   node
-                  )) routes)
-    (let [path (params+corecion-info->coererced-params  (keywordize-keys route-params) (-> @handler-info :parameters :path))
-          query (params+corecion-info->coererced-params (keywordize-keys route-query) (-> @handler-info :parameters :query))]
+                  )) routes))
+  (let [path (params+corecion-info->coerced-params  (keywordize-keys route-params) (-> @handler->info handler :parameters :path))
+        query (params+corecion-info->coerced-params (keywordize-keys route-query) (-> @handler->info handler :parameters :query))]
       (cond-> db
         handler (assoc-in [:router :route-parameters :key] handler)
         path (assoc-in [:router :route-parameters :path] path)
-        query (assoc-in [:router :route-parameters :query] query)))))
+      query (assoc-in [:router :route-parameters :query] query))))
