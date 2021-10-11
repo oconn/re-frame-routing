@@ -17,11 +17,12 @@
 (s/def ::route (s/nilable keyword?))
 (s/def ::route-params (s/nilable map?))
 (s/def ::route-query (s/nilable map?))
+(s/def ::route-parameters (s/nilable map?))
 (s/def ::router (s/keys :req-un [::route
                                  ::route-params
                                  ::route-query
-                                 ::initialized]))
-
+                                 ::initialized]
+                        :opt-un [::route-parameters]))
 (defn register-events
   "Registers re-frame-routing events"
   [opts]
@@ -51,6 +52,7 @@
     (let [route-params (re-frame/subscribe [:router/route-params])
           route-query (re-frame/subscribe [:router/route-query])
           route-key (re-frame/subscribe [:router/route])
+          route-parameters (re-frame/subscribe [:router/route-parameters])
           ;; Middleware state can be used for anything, and is the recommended
           ;; method for sharing infromation between middleware functions
           ;; or track information on global state updates that will trigger
@@ -74,6 +76,7 @@
                 :middleware-state @middleware-state
                 :route-params @route-params
                 :route-query @route-query
+                :route-parameters @route-parameters
                 :container container}
                middleware)]
 

@@ -1,8 +1,5 @@
 (ns re-frame-routing.events-test
-  (:require [clojure.spec.alpha :as s]
-            [cljs.test :refer-macros [deftest is testing]]
-            [cljs.pprint :refer [pprint]]
-
+  (:require [cljs.test :refer-macros [deftest is testing]]
             [re-frame-routing.events :as rfr-event]))
 
 (def initial-db

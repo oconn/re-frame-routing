@@ -35,6 +35,8 @@ ClojureScript (re-frame) library that manages routing and route state.
 
 *(Note this API is subject to change in future releases)*
 
+### Pre Dom Render Loading 
+
 Sometimes it's nice to perform work when a route is loading, maybe even prevent the route's view from displaying until that work is done, or even redirect if a user does not have access to view the route. These are good use cases for route-middleware.
 
 To add route-middleware to a route, first create the route-middleware function
@@ -81,6 +83,34 @@ Next let's look at `redirect-authenticated`
 ```
 
 Middleware functions will be passed a context object and are expected to return a context object. To prevent the execution of the next middleware function in the chain, toggle the `is-loading` property on the middleware context object to `true`.
+
+
+### Route Coercion
+
+Given data sent to the servers and to the component originates from information synced in the url (path and query params), it's ideal to have a way to share concerns over configuration (coercion and defaults).
+The library supports that concern by allowing you to supply an `routes-enirched` tree where leafs can be supplied a configuration instead of a keyword. e.g
+
+```
+{:query {:site {:coercion int?}
+         :role {:coercion int?}
+         :learner {:coercion #{"least-ready" "most-ready" "highest-mindset" "lowest-mindset"}
+                   :default "least-ready"}
+         :current-page {:coercion int?
+                :default 0}}}
+```
+
+this will then provide a route-parameters map to the component. e.g
+
+```
+{:route-parameters {:role 1 :learner "least-ready" :site 2 :current-page 0}}
+```
+
+This functionality is then handled by [spec-tools](https://github.com/metosin/spec-tools). Overall this is a less feature rich version of what's provided by [reitit](https://github.com/metosin/reitit/blob/master/doc/coercion/clojure_spec_coercion.md). 
+
+
+## Development
+
+Run ` clj -M:shadow-cljs watch app` to and get a watched build. See Shadow cljs docs for more.
 
 ## License
 
